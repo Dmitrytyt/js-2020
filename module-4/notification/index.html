@@ -16,6 +16,16 @@
     </div>
     <div id="footer" style="position: fixed; bottom: 0; right: 0;"></div>
     <script>
+      function generateRandomNumber (start, end) {
+        return start + Math.random() * end;
+      }
+
+      function generateRandomWord () {
+        const words = ['apple', 'banana', 'orange', 'tomato', 'grape'];
+
+        return words[Math.round(generateRandomNumber(0, 4))];
+      }
+
       new NotificationMessage('Hello world').show();
 
       document.getElementById('btn1').addEventListener('click', () => {
@@ -31,16 +41,6 @@
           type: Math.random() >= 0.5 ? 'success' : 'error'
         }).show(document.getElementById("footer"));
       });
-
-      function generateRandomNumber (start, end) {
-        return start + Math.random() * end;
-      }
-
-      function generateRandomWord () {
-        const words = ['apple', 'banana', 'orange', 'tomato', 'grape'];
-
-        return words[Math.round(generateRandomNumber(0, 4))];
-      }
     </script>
 </body>
 </html>
