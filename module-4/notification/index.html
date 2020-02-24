@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Notification</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="notification-message.js"></script>
+    <script src="notification-message-manager.js"></script>
+</head>
+<body>
+    <div class="wrap-btn">
+        <button id="btn1">Show simple message!</button>
+    </div>
+    <div style="position: fixed; top: 20px; right: 0;">
+        <button id="btn2">Show NotificationManager!</button>
+    </div>
+    <div id="footer" style="position: fixed; bottom: 0; right: 0;"></div>
+    <script>
+      new NotificationMessage('Hello world').show();
+
+      document.getElementById('btn1').addEventListener('click', () => {
+        new NotificationMessage(generateRandomWord(), {
+          duration: generateRandomNumber(1000, 4000),
+          type: Math.random() >= 0.5 ? 'success' : 'error'
+        }).show();
+      });
+
+      document.getElementById('btn2').addEventListener('click', () => {
+        new NotificationMessageManager(generateRandomWord(), {
+          duration: generateRandomNumber(1000, 4000),
+          type: Math.random() >= 0.5 ? 'success' : 'error'
+        }).show(document.getElementById("footer"));
+      });
+
+      function generateRandomNumber (start, end) {
+        return start + Math.random() * end;
+      }
+
+      function generateRandomWord () {
+        const words = ['apple', 'banana', 'orange', 'tomato', 'grape'];
+
+        return words[Math.round(generateRandomNumber(0, 4))];
+      }
+    </script>
+</body>
+</html>
