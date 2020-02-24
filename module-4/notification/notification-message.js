@@ -1,16 +1,10 @@
 class NotificationMessage {
-  static activeNotification = [];
-  static counter = 0;
-  static stackLimit = 5;
+  static activeNotification;
 
   constructor (message, {
     duration = 20000,
     type = 'success',
   } = {}) {
-
-    if (NotificationMessageManager.activeNotification.length > NotificationMessage.stackLimit -1) {
-      NotificationMessageManager.activeNotification.shift().remove();
-    }
 
     this.message = message;
     this.type = type;
@@ -31,15 +25,14 @@ class NotificationMessage {
         <div class="inner-wrapper">
           <div class="notification-header">${this.type}</div>
           <div class="notification-body">
-           ${counter} ${this.message}
+           ${this.message}
           </div>
         </div>
       </div>
     `;
 
     this.$element = $element.firstElementChild;
-    NotificationMessage.activeNotification.push(this.$element);
-    this.serialNumber = NotificationMessage.activeNotification.length;
+    NotificationMessage.activeNotification = this.$element;
   }
 
   show (parent) {
@@ -56,13 +49,10 @@ class NotificationMessage {
 
   remove () {
     this.$element.remove();
-    delete NotificationMessage.activeNotification[this.serialNumber];
-    NotificationMessage.counter--;
   }
 
   destroy () {
     this.remove();
     NotificationMessage.activeNotification = null;
-    NotificationMessage.counter = 0;
   }
 }
