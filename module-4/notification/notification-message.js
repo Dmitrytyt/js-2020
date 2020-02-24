@@ -1,13 +1,14 @@
 class NotificationMessage {
   static activeNotification = [];
   static counter = 0;
+  static stackLimit = 5;
 
   constructor (message, {
     duration = 20000,
     type = 'success',
   } = {}) {
 
-    if (NotificationMessageManager.activeNotification.length > 4) {
+    if (NotificationMessageManager.activeNotification.length > NotificationMessage.stackLimit -1) {
       NotificationMessageManager.activeNotification.shift().remove();
     }
 
